@@ -2,11 +2,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import Order from "@/models/Order";
 import { products } from "@/lib/products";
+import { dbConnect } from "@/lib/mongodb";
 
 export async function POST(req: NextRequest) {
   console.log("post payment");
   try {
     const { productId, phone, email } = await req.json();
+    await dbConnect();
 
     // محصول انتخابی را پیدا کنید
     const selectedProduct = products.find((p) => p.id === productId);

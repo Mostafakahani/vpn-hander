@@ -1,6 +1,7 @@
 // app/api/callback/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import Order from "@/models/Order";
+import { dbConnect } from "@/lib/mongodb";
 
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
@@ -13,6 +14,7 @@ export async function GET(req: NextRequest) {
       `${process.env.NEXT_PUBLIC_BASE_URL}?error=پرداخت_ناموفق`
     );
   }
+  await dbConnect();
 
   try {
     const order = await Order.findById(orderId);
