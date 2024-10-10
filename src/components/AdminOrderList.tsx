@@ -45,6 +45,7 @@ const AdminOrderList: React.FC = () => {
       );
       setLinks(initialLinks);
     } catch (err) {
+      console.log("Error fetching orders. Please try again later. ", err);
       setError("Error fetching orders. Please try again later.");
     } finally {
       setLoading(false);
@@ -84,6 +85,7 @@ const AdminOrderList: React.FC = () => {
       });
       alert("لینک با موفقیت ارسال شد");
     } catch (err) {
+      console.log("خطا در ارسال لینک ", err);
       alert("خطا در ارسال لینک");
     }
   };
