@@ -21,37 +21,43 @@ export async function POST(req: NextRequest, { params }: any) {
   }
 
   // Sending SMS using fetch
-  //   const res = await fetch("http://ippanel.com/api/select", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json", // Set the headers
-  //     },
-  //     body: JSON.stringify({
-  //       op: process.env.OP,
-  //       user: process.env.USER,
-  //       pass: process.env.PASS,
-  //       fromNum: process.env.FROMNUM,
-  //       toNum: order.phone,
-  //       patternCode: process.env.PATTERNCODE,
-  //       inputData: [{ verification: "00000", link: order.accessKey }], // Correct structure
-  //     }),
-  //   });
-
-  //   const smsResponse = await res.json();
-
-  //   if (smsResponse?.data) {
-  // Mark order as completed
-  order.status = "completed";
-  order.accessLink = String(link);
-  await order.save();
-  return NextResponse.json({
-    message: "لینک با موفقیت ارسال شد.",
-    link: order.accessKey,
+  const res = await fetch("http://ippanel.com/api/select", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      op: process.env.OP,
+      user: process.env.USER,
+      pass: process.env.PASS,
+      fromNum: process.env.FROMNUM,
+      toNum: order.phone,
+      patternCode: process.env.PATTERNCODE,
+      inputData: [
+        {
+          accesslink: `${process.env.NEXT_PUBLIC_BASE_URL}/show/${String(
+            order.accessKey
+          )}`,
+        },
+      ],
+    }),
   });
-  //   }
 
-  //   return NextResponse.json(
-  //     { error: "مشکلی در ارسال پیامک به وجود آمده است." },
-  //     { status: 400 }
-  //   );
+  const smsResponse = await res.json();
+  console.log({ smsResponse });
+  if (smsResponse) {
+    // Mark order as completed
+    order.status = "completed";
+    order.accessLink = String(link);
+    await order.save();
+    return NextResponse.json({
+      message: "لینک با موفقیت ارسال شد.",
+      link: order.accessKey,
+    });
+  }
+
+  return NextResponse.json(
+    { error: "مشکلی در ارسال پیامک به وجود آمده است." },
+    { status: 400 }
+  );
 }
