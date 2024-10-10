@@ -5,6 +5,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import ProductSelector from "../components/ProductSelector";
 import OrderForm from "../components/OrderForm";
 import { Product } from "../lib/products";
+import RetroGrid from "@/components/ui/retro-grid";
+import AnimatedGradientText from "@/components/ui/animated-gradient-text";
+import { AnimatedGradientTextDemo } from "@/components/ui/AnimatedGradientTextDemo";
+import { OrbitingCirclesDemo } from "@/components/ui/OrbitingCirclesDemo";
 
 function SearchParamsWrapper({ setSearchParamsState }: any) {
   const searchParams = useSearchParams();
@@ -17,7 +21,7 @@ function SearchParamsWrapper({ setSearchParamsState }: any) {
     });
   }, [searchParams, setSearchParamsState]);
 
-  return null; // We don't render anything here.
+  return null;
 }
 
 export default function Home() {
@@ -95,17 +99,30 @@ export default function Home() {
       </div>
     );
   }
-
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <>
+      <AnimatedGradientTextDemo />
       <SearchParamsWrapper setSearchParamsState={setSearchParamsState} />
-      <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-4">انتخاب محصول</h1>
-        <ProductSelector onSelect={handleProductSelect} />
-        {selectedProduct && (
-          <OrderForm product={selectedProduct} onSubmit={handleOrderSubmit} />
-        )}
+      <div className="w-full flex flex-col items-center gap-4">
+        <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background">
+          <span className="pointer-events-none z-10 whitespace-pre-wrap bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-7xl font-bold leading-none tracking-tighter text-transparent">
+            همیشه آنلاین هستیم
+          </span>
+          <RetroGrid />
+        </div>
+        <div className="w-full text-center font-bold text-2xl">
+          <h3 className="my-5">همه چیز رو تونل کن</h3>
+
+          <OrbitingCirclesDemo />
+        </div>
+        <div className="container mx-auto p-4">
+          <h1 className="text-2xl font-bold mb-4">انتخاب محصول</h1>
+          <ProductSelector onSelect={handleProductSelect} />
+          {selectedProduct && (
+            <OrderForm product={selectedProduct} onSubmit={handleOrderSubmit} />
+          )}
+        </div>
       </div>
-    </Suspense>
+    </>
   );
 }

@@ -1,5 +1,11 @@
-import { Product } from "@/lib/products";
 import React, { useState } from "react";
+import { Product } from "@/lib/products";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { AlertCircle } from "lucide-react";
+import { RainbowButton } from "./ui/rainbow-button";
 
 interface OrderFormProps {
   product: Product;
@@ -20,50 +26,61 @@ const OrderForm: React.FC<OrderFormProps> = ({ product, onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-4">
-      <h2 className="text-xl font-semibold mb-2">تکمیل سفارش</h2>
-      <div className="mb-4">
-        <label htmlFor="phone" className="block mb-1">
-          شماره تماس (اجباری)
-        </label>
-        <input
-          type="tel"
-          id="phone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          required
-          className="w-full p-2 border rounded"
-        />
-        <p className="text-sm text-gray-600 mt-1">
-          در صورت اشتباه وارد کردن شماره تماس، لینک برای شما ارسال نخواهد شد.
-        </p>
-      </div>
-      <div className="mb-4">
-        <label htmlFor="email" className="block mb-1">
-          ایمیل (اختیاری)
-        </label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 border rounded"
-        />
-      </div>
-      <div className="mb-4">
-        <h3 className="font-semibold">جزئیات سفارش:</h3>
-        <p>
-          {product.volume} - {product.duration}
-        </p>
-        <p>قیمت: {product.price.toLocaleString()} تومان</p>
-      </div>
-      <button
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      >
-        ورود به صفحه پرداخت
-      </button>
-    </form>
+    <Card className="mt-8">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold">تکمیل سفارش</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-2">
+            <Label htmlFor="phone" className="text-right block">
+              شماره تماس (اجباری)
+            </Label>
+            <Input
+              type="tel"
+              id="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+              className="w-full text-right"
+              dir="rtl"
+            />
+            <p className="text-sm text-gray-600 flex items-center">
+              <AlertCircle className="h-4 w-4 mr-2" />
+              در صورت اشتباه وارد کردن شماره تماس، لینک برای شما ارسال نخواهد
+              شد.
+            </p>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-right block">
+              ایمیل (اختیاری)
+            </Label>
+            <Input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full text-right"
+              dir="rtl"
+            />
+          </div>
+          <div className="bg-gray-100 p-4 rounded-lg">
+            <h3 className="font-semibold text-lg mb-2 text-right">
+              جزئیات سفارش:
+            </h3>
+            <p className="text-right">
+              {product.volume} - {product.duration}
+            </p>
+            <p className="text-right font-bold text-lg mt-2">
+              قیمت: {product.price.toLocaleString()} تومان
+            </p>
+          </div>
+          <RainbowButton type="submit" className="w-full">
+            ورود به صفحه پرداخت
+          </RainbowButton>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 

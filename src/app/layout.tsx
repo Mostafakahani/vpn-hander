@@ -4,15 +4,26 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { connectWithRetry } from "@/lib/mongodb";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const yekanBakhLight = localFont({
+  src: "./fonts/YekanBakhFaNum-Light.woff2",
+  variable: "--font-yekanBakh-light",
+  weight: "100 200",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const yekanBakhRegular = localFont({
+  src: "./fonts/YekanBakhFaNum-Regular.woff2",
+  variable: "--font-yekanBakh-regular",
+  weight: "300 500",
+});
+
+const yekanBakhBold = localFont({
+  src: "./fonts/YekanBakhFaNum-Bold.woff2",
+  variable: "--font-yekanBakh-bold",
+  weight: "600 700",
+});
+const yekanBakhBlack = localFont({
+  src: "./fonts/YekanBakhFaNum-Black.woff2",
+  variable: "--font-yekanBakh-black",
+  weight: "800",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +42,7 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <Providers>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${yekanBakhLight.variable} ${yekanBakhRegular.variable} ${yekanBakhBold.variable} ${yekanBakhBlack.variable} antialiased`}
         >
           {children}
         </body>
