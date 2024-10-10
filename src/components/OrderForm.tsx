@@ -40,7 +40,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ product, onSubmit }) => {
   };
 
   return (
-    <Card className="mt-8 max-w-md mx-auto">
+    <Card className="max-w-md mx-auto my-8">
       <CardHeader className="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-t-lg">
         <CardTitle className="text-2xl font-bold text-center">
           تکمیل سفارش
@@ -118,15 +118,16 @@ const OrderForm: React.FC<OrderFormProps> = ({ product, onSubmit }) => {
               جزئیات سفارش:
             </h3>
             <p className="text-right text-gray-700">
-              {product.volume} - {product.duration}
+              اکانت با حجم <strong>{product.volume}</strong> و به مدت{" "}
+              <strong>{product.duration}</strong>
             </p>
             <p className="text-right font-bold text-xl mt-2 text-blue-600">
               قیمت: {product.price.toLocaleString()} تومان
             </p>
           </div>
-          <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded-lg">
+          <div className="bg-yellow-100 border-r-4 border-yellow-500 p-4 rounded-lg">
             <p className="text-sm text-yellow-700 flex items-center justify-end">
-              <AlertCircle className="h-5 w-5 ml-2 text-yellow-500" />
+              <AlertCircle className="h-8 w-8 ml-2 text-yellow-500" />
               در صورت اشتباه وارد کردن شماره موبایل، لینک برای شما ارسال نخواهد
               شد و هزینه‌ای برگشت داده نمی‌شود.
             </p>
