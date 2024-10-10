@@ -1,15 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import { products, Product } from "../lib/products";
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  ChevronLeft,
-  Check,
-} from "lucide-react";
+import { ChevronLeft, Check } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Button } from "./ui/button";
 import ShimmerButton from "./ui/shimmer-button";
-import AnimatedShinyText from "./ui/animated-shiny-text";
 import { AnimatedShinyTextDemo } from "./ui/AnimatedShinyTextDemo";
 import { cn } from "@/lib/utils";
 import { LivePingDemo } from "./ui/LivePingDemo";
@@ -19,13 +12,19 @@ interface ProductSelectorProps {
 }
 
 const ProductSelector: React.FC<ProductSelectorProps> = ({ onSelect }) => {
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  const handleSelect = (product: Product) => {
+    onSelect(product);
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <div className="container mx-auto px-4 py-12">
       <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
         انتخاب پلن VPN
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {products.map((product, index) => (
+        {products.map((product) => (
           <Card
             key={product.id}
             className={cn(
@@ -61,7 +60,7 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onSelect }) => {
                 </div>
                 <div className="w-full flex justify-center ">
                   <ShimmerButton
-                    onClick={() => onSelect(product)}
+                    onClick={() => handleSelect(product)}
                     className="py-3 text-lg font-semibold"
                   >
                     انتخاب پلن
@@ -73,6 +72,7 @@ const ProductSelector: React.FC<ProductSelectorProps> = ({ onSelect }) => {
           </Card>
         ))}
       </div>
+      <div ref={bottomRef} />
     </div>
   );
 };
