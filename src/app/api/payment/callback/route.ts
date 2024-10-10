@@ -36,7 +36,7 @@ export async function GET(req: NextRequest) {
         },
         body: JSON.stringify({
           merchant_id: process.env.ZARINPAL_MERCHANT_ID,
-          amount: 1000, /////order.product.price,
+          amount: order.product.price, /////order.product.price,
           authority: authority,
         }),
       }
