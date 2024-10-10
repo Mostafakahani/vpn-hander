@@ -5,6 +5,8 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: Yekan Bakh !important;
+
 }
 
 @layer base {
@@ -33,13 +35,13 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem
-  ;
+    --radius: 0.5rem;
     --color-1: 0 100% 63%;
     --color-2: 270 100% 63%;
     --color-3: 210 100% 63%;
     --color-4: 195 100% 63%;
-    --color-5: 90 100% 63%}
+    --color-5: 90 100% 63%
+  }
 
   .dark {
     --background: 224 71.4% 4.1%;
@@ -65,13 +67,13 @@
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%
-  ;
+    --chart-5: 340 75% 55%;
     --color-1: 0 100% 63%;
     --color-2: 270 100% 63%;
     --color-3: 210 100% 63%;
     --color-4: 195 100% 63%;
-    --color-5: 90 100% 63%}
+    --color-5: 90 100% 63%
+  }
 }
 
 @layer base {
@@ -88,6 +90,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

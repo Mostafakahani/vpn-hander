@@ -16,5 +16,6 @@ export async function POST(req: NextRequest, { params }: any) {
   return NextResponse.json({
     message: "لینک با موفقیت پیدا شد.",
     link: order.accessLink,
+    status: order.paymentStatus,
   });
 }

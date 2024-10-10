@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./providers";
 import { connectWithRetry } from "@/lib/mongodb";
+import { Toaster } from "@/components/ui/toaster";
+import LoadingProvider from "./LoadingProvider";
 
 const yekanBakhLight = localFont({
   src: "./fonts/YekanBakhFaNum-Light.woff2",
@@ -44,7 +46,10 @@ export default function RootLayout({
         <body
           className={`${yekanBakhLight.variable} ${yekanBakhRegular.variable} ${yekanBakhBold.variable} ${yekanBakhBlack.variable} antialiased`}
         >
-          {children}
+          <LoadingProvider>
+            {children}
+            <Toaster />
+          </LoadingProvider>
         </body>
       </Providers>
     </html>

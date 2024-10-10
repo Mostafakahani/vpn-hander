@@ -10,8 +10,9 @@ export async function GET(req: NextRequest) {
   const status = searchParams.get("Status");
 
   if (!orderId || !authority || status !== "OK") {
-    return NextResponse.redirect(
-      `${process.env.NEXT_PUBLIC_BASE_URL}?error=پرداخت_ناموفق`
+    return NextResponse.json(
+      { status: false, message: "پرداخت ناموفق" },
+      { status: 400 }
     );
   }
   await dbConnect();
@@ -19,8 +20,9 @@ export async function GET(req: NextRequest) {
   try {
     const order = await Order.findById(orderId);
     if (!order) {
-      return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_BASE_URL}?error=سفارش_پیدا_نشد`
+      return NextResponse.json(
+        { status: false, message: "سفارشی پیدا نشد." },
+        { status: 400 }
       );
     }
 
@@ -46,18 +48,18 @@ export async function GET(req: NextRequest) {
     if (data.data.code === 100) {
       order.paymentStatus = "completed";
       await order.save();
-      return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_BASE_URL}?code=${orderId}`
+      return NextResponse.json(
+        { status: true, code: order.accessKey },
+        { status: 201 }
       );
     } else {
-      return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_BASE_URL}?error=تایید_پرداخت_ناموفق`
+      return NextResponse.json(
+        { status: false, code: order.accessKey },
+        { status: 200 }
       );
     }
   } catch (error) {
     console.error("خطا در بررسی پرداخت:", error);
-    return NextResponse.redirect(
-      `${process.env.NEXT_PUBLIC_BASE_URL}?error=خطای_سرور`
-    );
+    return NextResponse.json({ status: false }, { status: 400 });
   }
 }

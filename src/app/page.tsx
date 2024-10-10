@@ -8,6 +8,9 @@ import { Product } from "../lib/products";
 import RetroGrid from "@/components/ui/retro-grid";
 import { AnimatedGradientTextDemo } from "@/components/ui/AnimatedGradientTextDemo";
 import { OrbitingCirclesDemo } from "@/components/ui/OrbitingCirclesDemo";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import ShinyButton from "@/components/ui/shiny-button";
 
 interface SearchParamsState {
   authority: string;
@@ -36,6 +39,7 @@ function SearchParamsWrapper({
 
 export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [accessKey, setAccessKey] = useState<string | null>(null);
   const router = useRouter();
   const [searchParamsState, setSearchParamsState] = useState<SearchParamsState>(
     {
@@ -94,6 +98,7 @@ export default function Home() {
           );
           const data = await res.json();
           console.log({ data });
+          setAccessKey(data.code || null);
           // Handle successful payment here
         } catch (error) {
           console.error("Error checking payment:", error);
@@ -110,8 +115,18 @@ export default function Home() {
           سفارش شما با موفقیت ثبت شد
         </span>
         <RetroGrid />
-        <div className="container mx-auto p-4 text-center text-xl">
+        <div className="container flex flex-col gap-4 mx-auto p-4 text-center text-xl">
           <p>بزودی لینک برای شماره موبایل شما ارسال خواهد شد.</p>
+          <p>کد پیگیری: {accessKey}</p>
+          <p className="text-sm">
+            صفحه دریافت لینک که بعد از آماده شدن پیامک خواهد شد:
+          </p>
+          <Link
+            className="text-sm"
+            href={process.env.NEXT_PUBLIC_BASE_URL + "/show/" + accessKey}
+          >
+            <ShinyButton>ورود به صفحه</ShinyButton>
+          </Link>
         </div>
       </div>
     );
