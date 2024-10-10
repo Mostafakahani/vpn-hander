@@ -89,7 +89,9 @@ const AdminOrderList: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="text-center p-4">Loading orders...</div>;
+    return (
+      <div className="text-center p-4">درحال بارگذاری لیست سفارشات...</div>
+    );
   }
 
   if (error) {
@@ -116,7 +118,7 @@ const AdminOrderList: React.FC = () => {
     }
   };
   return (
-    <Card className="mt-4 md:m-4">
+    <Card className="mt-4">
       <CardHeader>
         <CardTitle className="text-xl md:text-2xl">لیست سفارش‌ها</CardTitle>
       </CardHeader>
