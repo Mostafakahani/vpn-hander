@@ -9,7 +9,6 @@ import RetroGrid from "@/components/ui/retro-grid";
 import { AnimatedGradientTextDemo } from "@/components/ui/AnimatedGradientTextDemo";
 import { OrbitingCirclesDemo } from "@/components/ui/OrbitingCirclesDemo";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import ShinyButton from "@/components/ui/shiny-button";
 
 interface SearchParamsState {

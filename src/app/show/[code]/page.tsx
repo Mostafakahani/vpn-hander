@@ -49,6 +49,7 @@ export default function ShowAccessLink() {
         description: "لینک در کلیپ‌بورد کپی شد.",
       });
     } catch (err) {
+      console.log("کپی کردن لینک با مشکل مواجه شد. ", err);
       toast({
         title: "خطا",
         description: "کپی کردن لینک با مشکل مواجه شد.",
