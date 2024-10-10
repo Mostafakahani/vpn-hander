@@ -17,6 +17,6 @@ export const products: Product[] = [
   { id: "2m-50gb", volume: "50GB", duration: "2 ماهه", price: 160000 },
   { id: "2m-60gb", volume: "60GB", duration: "2 ماهه", price: 180000 },
   { id: "2m-70gb", volume: "70GB", duration: "2 ماهه", price: 200000 },
-  { id: "2m-80gb", volume: "80GB", duration: "2 ماهه", price: 2300000 },
+  { id: "2m-80gb", volume: "80GB", duration: "2 ماهه", price: 230000 },
   { id: "2m-100gb", volume: "100GB", duration: "2 ماهه", price: 250000 },
 ];
