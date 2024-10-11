@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
         },
         body: JSON.stringify({
           merchant_id: process.env.ZARINPAL_MERCHANT_ID,
-          amount: 1000, //// selectedProduct.price * 10
+          amount: selectedProduct.price * 10, //// selectedProduct.price * 10
           description: `VPN: ${selectedProduct.volume} برای ${selectedProduct.duration}`,
           callback_url: `${process.env.NEXT_PUBLIC_BASE_URL}?code=${newOrder._id}`,
           metadata: {
